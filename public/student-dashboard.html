@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/student.css">
+    <link rel="icon" href="assets/badge.png" type="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <span>Francirene Educational Consult</span>
+                </div>
+                <ul class="nav-links2">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/parent-enrollment">Enroll</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button id="themeToggle" class="theme-toggle nav-btn"><i class="fas fa-moon"></i></button>
+                    <a href="/admin-login" class="nav-btn"><i class="fas fa-user-shield" style="margin-right:8px"></i>Admin</a>
+                </div>
+                <div class="hamburger"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="student-container">
+        <!-- Sidebar -->
+        <aside class="student-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-user-graduate"></i>
+                <h2>Student Portal</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="student-menu-item student-active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#subjects" class="student-menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>Subjects & Resources</span>
+                </a>
+                <a href="#progress" class="student-menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>My Progress</span>
+                </a>
+                <a href="#timetable" class="student-menu-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Timetable</span>
+                </a>
+                <a href="#" id="logout" class="student-menu-item logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="student-main">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h1 id="welcomeText">Welcome to your Student Portal</h1>
+                    <p id="studentInfo"></p>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="dashboard" class="student-section active">
+                <div class="container">
+                    <h2>Dashboard</h2>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <i class="fas fa-book"></i>
+                            <h3>Available Resources</h3>
+                            <p id="resourceCount">0</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-download"></i>
+                            <h3>Downloads</h3>
+                            <p id="downloadCount">0</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-star"></i>
+                            <h3>Performance</h3>
+                            <p id="performance">Excellent</p>
+                        </div>
+                        <div class="dashboard-card">
+                            <i class="fas fa-calendar-check"></i>
+                            <h3>Classes This Week</h3>
+                            <p id="classCount">5</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subjects & Resources View -->
+            <section id="subjects" class="student-section">
+                <div class="container">
+                    <h2>Subjects & Resources</h2>
+                    <div class="subjects-list" id="subjectsList"></div>
+                </div>
+            </section>
+
+            <!-- Progress View -->
+            <section id="progress" class="student-section">
+                <div class="container">
+                    <h2>My Progress</h2>
+                    <div class="progress-content">
+                        <p>Class Tests, Remarks and Reviews will appear here.</p>
+                        <div id="progressList" class="progress-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timetable View -->
+            <section id="timetable" class="student-section"
+                <div class="container">
+                    <h2>Class Timetable</h2>
+                    <div id="timetableContent" class="timetable-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/student-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+// Parent Dashboard JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    setupNavigation();
+    loadParentInfo();
+    loadChildProgress();
+    loadResources();
+    loadTimetable();
+    loadReviews();
+
+    // Logout functionality
+    document.getElementById('logout').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            await fetch('/api/admin-logout', { method: 'POST' });
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    });
+});
+
+function setupNavigation() {
+    const navItems = document.querySelectorAll('.parent-menu-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (item.id === 'logout') return;
+            e.preventDefault();
+
+            navItems.forEach(ni => ni.classList.remove('parent-active'));
+            item.classList.add('parent-active');
+
+            const href = item.getAttribute('href') || '#dashboard';
+            const targetId = href.startsWith('#') ? href.substring(1) : href;
+            showContentView(targetId);
+        });
+    });
+}
+
+function showContentView(viewId) {
+    const views = document.querySelectorAll('.parent-section');
+    views.forEach(view => view.classList.remove('active'));
+    const targetView = document.getElementById(viewId);
+    if (targetView) {
+        targetView.classList.add('active');
+    }
+}
+
+function loadParentInfo() {
+    const welcomeText = document.getElementById('welcomeText');
+    const childInfo = document.getElementById('childInfo');
+    const childName = document.getElementById('childName');
+    const childClass = document.getElementById('childClass');
+    // Fetch session info to display real parent/child data
+    fetch('/api/session').then(r => r.json()).then(data => {
+        if (data.success && data.role === 'parent' && data.parent) {
+            welcomeText.textContent = `Welcome, ${data.parent.parentId}`;
+            childInfo.textContent = `Monitoring ${data.parent.childName}'s progress`;
+            childName.textContent = data.parent.childName || 'Student Name';
+            childClass.textContent = data.parent.childClass || '';
+        } else {
+            // Fallback
+            welcomeText.textContent = 'Welcome to Parent Portal';
+            childInfo.textContent = 'Monitor your child\'s progress and access learning resources';
+            childName.textContent = 'Student Name';
+            childClass.textContent = 'JHS 2';
+        }
+    }).catch(err => {
+        console.error('Error fetching session info:', err);
+    });
+}
+
+async function loadChildProgress() {
+    const progressContent = document.getElementById('progressContent');
+    
+    // First load reviews for this child
+    try {
+        const response = await fetch('/api/reviews');
+        const data = await response.json();
+        
+        if (data.success && data.reviews.length > 0) {
+            const reviewsHTML = data.reviews.map(review => `
+                <div class="progress-item">
+                    <h3>Teacher Review</h3>
+                    <p><strong>Academic Performance:</strong> ${review.academicPerformance}</p>
+                    <p><strong>Behavior & Conduct:</strong> ${review.behavior}</p>
+                    <p><strong>Attendance:</strong> ${review.attendance}%</p>
+                    <p><strong>Teacher Remarks:</strong> ${review.teacherRemarks}</p>
+                    <p><strong>Parental Advice:</strong> ${review.parentalAdvice}</p>
+                    <p class="small muted">${new Date(review.createdAt).toLocaleString()}</p>
+                </div>
+            `).join('');
+            
+            progressContent.innerHTML = reviewsHTML;
+            return;
+        }
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+    }
+    
+    // Fallback mock progress data
+    const progressData = [
+        { subject: 'Mathematics', status: 'Good', lastUpdate: '2024-12-03' },
+        { subject: 'English', status: 'Excellent', lastUpdate: '2024-12-02' },
+        { subject: 'Science', status: 'Good', lastUpdate: '2024-12-01' }
+    ];
+    
+    progressContent.innerHTML = progressData.map(item => `
+        <div class="progress-item">
+            <h3>${item.subject}</h3>
+            <p><strong>Status:</strong> ${item.status}</p>
+            <p><strong>Last Update:</strong> ${item.lastUpdate}</p>
+        </div>
+    `).join('');
+}
+
+async function loadResources() {
+    try {
+        const response = await fetch('/api/resources');
+        const data = await response.json();
+
+        if (data.success) {
+            const resourcesList = document.getElementById('resourcesList');
+            if (!resourcesList) return;
+
+            if (data.resources.length === 0) {
+                resourcesList.innerHTML = '<p>No resources uploaded yet.</p>';
+                return;
+            }
+
+            resourcesList.innerHTML = data.resources.map(resource => `
+                <div class="resource-item">
+                    <h3>${resource.title}</h3>
+                    <p class="small muted">Subject: ${resource.subject} — Uploaded: ${new Date(resource.uploadDate).toLocaleDateString()}</p>
+                    <p>${resource.description || ''}</p>
+                    <a href="/uploads/${resource.filename}" class="resource-download btn btn-primary" download>${resource.originalName ? 'Download' : 'Download File'}</a>
+                </div>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Error loading resources:', error);
+    }
+}
+
+async function loadTimetable() {
+    try {
+        const response = await fetch('/api/timetables');
+        const data = await response.json();
+
+        if (data.success && data.timetables.length > 0) {
+            const timetableContent = document.getElementById('timetableContent');
+            if (!timetableContent) return;
+
+            let html = '';
+            data.timetables.forEach(timetable => {
+                html += `<div style="margin-bottom:2rem;"><h3>${timetable.title}</h3>`;
+                html += `<p style="color:#6b7280; font-size:0.9rem;"><strong>Period:</strong> ${new Date(timetable.startDate).toLocaleDateString()} to ${new Date(timetable.endDate).toLocaleDateString()}</p>`;
+                html += renderTimetableGrid(timetable);
+                html += '</div>';
+            });
+            
+            timetableContent.innerHTML = html;
+        } else {
+            document.getElementById('timetableContent').innerHTML = '<p>No timetable available yet.</p>';
+        }
+    } catch (error) {
+        console.error('Error loading timetable:', error);
+    }
+}
+
+function renderTimetableGrid(timetable) {
+    if (!timetable.classes || timetable.classes.length === 0) {
+        return '<p>No classes in this timetable.</p>';
+    }
+
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const dayMap = {};
+    
+    days.forEach(day => {
+        dayMap[day] = [];
+    });
+
+    timetable.classes.forEach(cls => {
+        if (dayMap[cls.day]) {
+            dayMap[cls.day].push(cls);
+        }
+    });
+
+    days.forEach(day => {
+        dayMap[day].sort((a, b) => a.time.localeCompare(b.time));
+    });
+
+    const times = new Set();
+    timetable.classes.forEach(cls => times.add(cls.time));
+    const sortedTimes = Array.from(times).sort();
+
+    let html = '<table class="timetable-grid" style="width:100%; border-collapse:collapse; background:white; margin:1rem 0; border:1px solid #e5e7eb;"><thead style="background:linear-gradient(135deg, #0b3b66 0%, #0b76ff 100%); color:white;"><tr><th style="padding:0.75rem; text-align:left; font-weight:600; border-right:1px solid rgba(255,255,255,0.2);">Time</th>';
+    
+    days.forEach(day => {
+        html += `<th style="padding:0.75rem; text-align:left; font-weight:600; border-right:1px solid rgba(255,255,255,0.2);">${day}</th>`;
+    });
+    
+    html += '</tr></thead><tbody>';
+
+    sortedTimes.forEach(time => {
+        html += `<tr><td style="padding:0.75rem; border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb; font-weight:600; color:#0b76ff; font-size:0.85rem;">${time}</td>`;
+        days.forEach(day => {
+            const classForSlot = dayMap[day].find(c => c.time === time);
+            html += '<td style="padding:0.75rem; border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb; font-size:0.9rem; vertical-align:top;">';
+            if (classForSlot) {
+                html += `<div style="font-weight:600; color:#1f2937;">${classForSlot.subject}</div><div style="color:#6b7280; font-size:0.85rem;">${classForSlot.class}</div>`;
+            }
+            html += '</td>';
+        });
+        html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    return html;
+}
+
+// Load reviews for parent
+async function loadReviews() {
+    try {
+        const response = await fetch('/api/reviews');
+        const data = await response.json();
+        
+        if (data.success && data.reviews && data.reviews.length > 0) {
+            // Reviews are shown in progress section, so just cache them
+            window.parentReviews = data.reviews;
+        }
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+    }
+}

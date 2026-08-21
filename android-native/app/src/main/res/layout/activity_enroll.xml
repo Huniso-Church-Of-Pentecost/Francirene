@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Enrollment"
+            android:textColor="@color/colorText"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child Details"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etChildName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Child's Full Name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etChildClass" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Class / Level" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner android:id="@+id/spinnerChildGender" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardian Details"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etGuardianName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Guardian's Full Name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etGuardianEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Guardian's Email" android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etGuardianPhone" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Guardian's Phone" android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner android:id="@+id/spinnerGuardianGender" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Service Type"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <Spinner android:id="@+id/spinnerService" android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subjects (select all that apply)"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupSubjects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:singleSelection="false" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="20dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etConcerns" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Any concerns or notes (optional)" android:inputType="textMultiLine" android:minLines="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Submit Enrollment" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>

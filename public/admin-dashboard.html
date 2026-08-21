@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" href="assets/badge.png" type="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Admin Navbar -->
+    <nav class="admin-navbar">
+        <div class="admin-nav-container">
+            <div class="admin-logo">
+                <img src="assets/badge.png" alt="Organization Badge" class="org-badge">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Francirene Admin</span>
+            </div>
+            <div class="navbar-actions">
+                <button class="navbar-btn theme-toggle" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="navbar-btn logout-btn" id="logout" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Sidebar & Main -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <ul class="admin-menu">
+                <li><a href="#" class="menu-item active" onclick="showSection('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('enrollments')"><i class="fas fa-list"></i> All Enrollments</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('approved')"><i class="fas fa-check-circle"></i> Approved</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('rejected')"><i class="fas fa-times-circle"></i> Rejected</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('reviews')"><i class="fas fa-star"></i> Student Reviews</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('resources')"><i class="fas fa-book"></i> Resources</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('timetable')"><i class="fas fa-calendar"></i> Timetable</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('newsletter')"><i class="fas fa-envelope-open-text"></i> Newsletter</a></li>
+                <li><a href="#" class="menu-item" onclick="showSection('settings')"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="admin-section active">
+                <h1>Dashboard</h1>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e0f2fe;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Total Enrollments</h3>
+                            <p id="totalEnrollments" class="stat-value">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Approved</h3>
+                            <p id="approvedCount" class="stat-value">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fee2e2;">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Rejected</h3>
+                            <p id="rejectedCount" class="stat-value">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7;">
+                            <i class="fas fa-hourglass"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Pending</h3>
+                            <p id="pendingCount" class="stat-value">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-bookings">
+                    <h2>Enrollment Status</h2>
+                    <div class="enrollment-status">
+                        <p id="enrollmentStatusText"></p>
+                        <button id="toggleEnrollment" class="btn btn-primary">Toggle Enrollment</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Enrollments View -->
+            <section id="enrollments" class="admin-section">
+                <h1>All Enrollments</h1>
+                <div class="bookings-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name or email..." onkeyup="searchEnrollments()">
+                    </div>
+                    <div id="enrollmentMessage" class="message" style="margin-left:1rem;"></div>
+                </div>
+                <div id="enrollmentsList" class="bookings-list"></div>
+            </section>
+
+            <!-- Approved View -->
+            <section id="approved" class="admin-section">
+                <h1>Approved Enrollments</h1>
+                <div id="approvedList" class="bookings-list"></div>
+            </section>
+
+            <!-- Rejected View -->
+            <section id="rejected" class="admin-section">
+                <h1>Rejected Enrollments</h1>
+                <div id="rejectedList" class="bookings-list"></div>
+            </section>
+
+            <!-- Student Reviews & Remarks View -->
+            <section id="reviews" class="admin-section">
+                <h1>Student Reviews & Remarks</h1>
+                <div class="reviews-container">
+                    <div class="reviews-form-section">
+                        <h2>Add Student Review</h2>
+                        <form id="studentReviewForm" class="review-form">
+                            <div class="form-group">
+                                <label for="studentSelect">Select Student</label>
+                                <select id="studentSelect" required>
+                                    <option value="">-- Choose a Student --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="academicPerformance">Academic Performance</label>
+                                <select id="academicPerformance" required>
+                                    <option value="Excellent">Excellent</option>
+                                    <option value="Very Good">Very Good</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Average">Average</option>
+                                    <option value="Needs Improvement">Needs Improvement</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="behavior">Behavior & Conduct</label>
+                                <select id="behavior" required>
+                                    <option value="Excellent">Excellent</option>
+                                    <option value="Very Good">Very Good</option>
+                                    <option value="Good">Good</option>
+                                    <option value="Average">Average</option>
+                                    <option value="Needs Improvement">Needs Improvement</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendance">Attendance Rate (%)</label>
+                                <input type="number" id="attendance" min="0" max="100" value="85" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="teacherRemarks">Teacher Remarks</label>
+                                <textarea id="teacherRemarks" rows="4" placeholder="Enter detailed remarks about the student..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="parentalAdvice">Parental Advice</label>
+                                <textarea id="parentalAdvice" rows="4" placeholder="Any advice or suggestions for parents..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Review</button>
+                        </form>
+                        <div id="reviewMessage" class="message"></div>
+                    </div>
+                    <div class="reviews-list-section">
+                        <h2>Submitted Reviews</h2>
+                        <div id="reviewsList" class="reviews-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Resources View -->
+            <section id="resources" class="admin-section">
+                <h1>Learning Resources</h1>
+                <div class="resources-container">
+                    <div class="resources-form-section">
+                        <h2>Upload New Resource</h2>
+                        <form id="resourceForm" class="upload-form">
+                            <div class="form-group">
+                                <label for="resourceTitle">Resource Title</label>
+                                <input type="text" id="resourceTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceSubject">Subject</label>
+                                <select id="resourceSubject" required>
+                                    <option value="">Chemistry</option>
+                                    <option value="">Social Studies</option>
+                                    <option value="">English</option>
+                                    <option value="">Computer Science</option>
+                                    <option value="">I.C.T</option>
+                                    <option value="">Biology</option>
+                                    <option value="">Core Maths</option>
+                                    <option value="">E-Maths</option>
+                                    <option value="">Physics</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceDescription">Description</label>
+                                <textarea id="resourceDescription" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="resourceFile">Upload File (PDF, Images, Videos)</label>
+                                <input type="file" id="resourceFile" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Resource</button>
+                        </form>
+                        <div id="resourceMessage" class="message"></div>
+
+                        <hr style="margin:2rem 0; border-color:#e6e6e6;">
+
+                        <h2>Upload Welcome Motion</h2>
+                        <form id="welcomeMotionForm" class="upload-form">
+                            <div class="form-group">
+                                <label for="welcomeMotionFile">Upload Motion Video (MP4)</label>
+                                <input type="file" id="welcomeMotionFile" accept="video/*" required>
+                            </div>
+                            <div class="form-group">
+                                <video id="welcomeMotionPreview" controls style="max-width:320px; display:none; margin-top:1rem; border-radius:8px;"></video>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Motion</button>
+                        </form>
+                        <div id="welcomeMotionMessage" class="message"></div>
+                    </div>
+                    <div class="resources-grid-section">
+                        <h2>Available Resources</h2>
+                        <div id="resourcesGrid" class="resources-grid"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create Timetable View -->
+            <section id="timetable" class="admin-section">
+                <h1>Class Timetable Management</h1>
+                <div class="timetable-container">
+                    <div class="timetable-form-section">
+                        <h2>Create New Timetable</h2>
+                        <form id="timetableForm" class="timetable-form">
+                            <div class="form-group">
+                                <label for="timetableTitle">Timetable Title</label>
+                                <input type="text" id="timetableTitle" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" id="startDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">End Date</label>
+                                    <input type="date" id="endDate" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="repeatWeeks">Repeat for Weeks</label>
+                                <select id="repeatWeeks">
+                                    <option value="1">1 Week Only</option>
+                                    <option value="2">2 Weeks</option>
+                                    <option value="3">3 Weeks</option>
+                                    <option value="4">4 Weeks</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timetableClasses">Classes (JSON format)</label>
+                                <textarea id="timetableClasses" rows="8" placeholder='[{"day":"Monday","time":"9:00 AM","subject":"Biology","class":"JHS 1"}]'></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Timetable</button>
+                        </form>
+                        <div id="timetableMessage" class="message"></div>
+                    </div>
+                    <div class="timetable-grid-section">
+                        <h2>Created Timetables</h2>
+                        <div id="timetableListContainer" class="timetable-grid"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter View -->
+            <section id="newsletter" class="admin-section">
+                <h1>Newsletter Management</h1>
+                <div class="newsletter-controls">
+                    <div class="newsletter-form-card">
+                        <!-- Decorative shapes for a motion-graphics like look -->
+                        <div class="newsletter-decor" aria-hidden="true">
+                            <span class="decor-circle decor-a"></span>
+                            <span class="decor-circle decor-b"></span>
+                        </div>
+                        <form id="adminNewsletterForm" class="newsletter-form">
+                            <div class="form-group">
+                                <label for="newsletterSubject">Subject</label>
+                                <input type="text" id="newsletterSubject" placeholder="Newsletter subject..." required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newsletterMessage">Message</label>
+                                <textarea id="newsletterMessage" rows="6" placeholder="Write your newsletter message..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary send-newsletter">
+                                <i class="fas fa-paper-plane send-plane" aria-hidden="true"></i>
+                                <span class="btn-text">Send Newsletter</span>
+                            </button>
+                        </form>
+                        <div id="newsletterStatus" class="message"></div>
+                    </div>
+                </div>
+                <div class="subscribers-list">
+                    <h2>Subscribers</h2>
+                    <div id="subscribersList"></div>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="settings" class="admin-section">
+                <h1>Settings</h1>
+                <div class="settings-container">
+                    <div class="setting-item">
+                        <h3>Change Password</h3>
+                        <form id="changePasswordForm" class="setting-form">
+                            <input type="password" id="currentPassword" placeholder="Current Password" required>
+                            <input type="password" id="newPassword" placeholder="New Password" required>
+                            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                            <button type="submit" class="btn btn-primary">Update Password</button>
+                        </form>
+                        <div id="passwordMessage" class="message"></div>
+                    </div>
+                    <div class="setting-item">
+                        <h3>Enrollment Settings</h3>
+                        <form id="enrollmentSettingsForm" class="setting-form">
+                            <input type="number" id="enrollmentLimit" placeholder="Enrollment Limit" min="1" required>
+                            <button type="submit" class="btn btn-primary">Update Enrollment Limit</button>
+                        </form>
+                        <div id="settingsMessage" class="message"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <!-- GSAP for timeline-style UI motion in admin (optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+3g0i9bW9i4p3xT6mGQ8r7bq1Q4h1Ykz6v0YtR9w1uZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

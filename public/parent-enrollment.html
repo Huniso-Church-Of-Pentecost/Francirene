@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Enrollment - Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="icon" href="assets/badge.png" type="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <span>Francirene Educational Consult</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/student-login">Student Login</a></li>
+                    <li><a href="/parent-login">Parent Login</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button id="themeToggle" class="theme-toggle nav-btn"><i class="fas fa-moon"></i></button>
+                    <a href="/" class="nav-btn"><i class="fas fa-home"></i></a>
+                </div>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="enrollment-section">
+        <div class="container">
+            <div class="enrollment-form-container">
+                <h2>Parent Enrollment Form</h2>
+                <form id="enrollmentForm" class="enrollment-form">
+                    
+                    <fieldset>
+                        <legend>Child Information</legend>
+                        <div class="form-group">
+                            <label for="childName">Child's Full Name *</label>
+                            <input type="text" id="childName" name="childName" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="childClass">Class/Form *</label>
+                                <select id="childClass" name="childClass" required>
+                                    <option value="">Select Class</option>
+                                    <option value="JHS 1">JHS 1</option>
+                                    <option value="JHS 2">JHS 2</option>
+                                    <option value="JHS 3">JHS 3</option>
+                                    <option value="SHS 1">SHS 1</option>
+                                    <option value="SHS 2">SHS 2</option>
+                                    <option value="SHS 3">SHS 3</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="childGender">Child's Gender *</label>
+                                <select id="childGender" name="childGender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Guardian Information</legend>
+                        <div class="form-group">
+                            <label for="guardianName">Guardian's Full Name *</label>
+                            <input type="text" id="guardianName" name="guardianName" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guardianGender">Guardian's Gender *</label>
+                                <select id="guardianGender" name="guardianGender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="guardianEmail">Guardian's Email *</label>
+                                <input type="email" id="guardianEmail" name="guardianEmail" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guardianPhone">Guardian's Phone Number *</label>
+                            <input type="tel" id="guardianPhone" name="guardianPhone" required>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Service Selection</legend>
+                        <div class="form-group">
+                            <label for="serviceType">Type of Service Required *</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select Service</option>
+                                <option value="Pre-SHS Special Classes">Pre-SHS Special Classes</option>
+                                <option value="Vacation Classes">Vacation Classes</option>
+                                <option value="Wassce, Nov/Dec (SHS & Basic)">WASSCE, Nov/Dec (SHS & Basic)</option>
+                                <option value="Nov/Dec & BECE Registration">Nov/Dec & BECE Registration</option>
+                                <option value="Adult Education">Adult Education</option>
+                                <option value="Preparatory Classes For Pre-Engineering Students">Preparatory Classes For Pre-Engineering Students</option>
+                                <option value="University Admission Form Application (Local And Foreign)">University Admission Form Application (Local And Foreign)</option>
+                                <option value="Professional CV Writing & Cover Letter Preparation">Professional CV Writing & Cover Letter Preparation</option>
+                                <option value="Career and Educational Guidance & Counseling">Career and Educational Guidance & Counseling</option>
+                                <option value="Travelling Passport Application Assistance">Travelling Passport Application Assistance</option>
+                            </select>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Subject Selection</legend>
+                        <p>Select subjects your child needs help with:</p>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Biology">
+                                <span>Biology</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Chemistry">
+                                <span>Chemistry</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Physics">
+                                <span>Physics</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="E-Maths">
+                                <span>E-Maths</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Core Maths">
+                                <span>Core Maths</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Social Studies">
+                                <span>Social Studies</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="English">
+                                <span>English</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="Computer Science">
+                                <span>Computer Science</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subjects" value="I.C.T">
+                                <span>I.C.T</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Additional Information</legend>
+                        <div class="form-group">
+                            <label for="concerns">Specific Concerns or Areas of Focus:</label>
+                            <textarea id="concerns" name="concerns" rows="4" placeholder="Please specify any particular challenges or areas your child needs extra attention in"></textarea>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn btn-large btn-primary">Complete Enrollment</button>
+                </form>
+
+                <div id="enrollmentMessage" class="message"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Francirene Educational Consult. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/enrollment.js"></script>
+</body>
+</html>

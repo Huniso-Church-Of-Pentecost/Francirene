@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Enrollment Control" android:textColor="@color/colorPrimary" android:textStyle="bold" android:layout_marginBottom="8dp" />
+
+        <TextView android:id="@+id/tvEnrollmentStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/colorText" android:layout_marginBottom="8dp" android:text="Loading..." />
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnToggleEnrollment" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Toggle Enrollment Open/Closed" android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etLimit" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Enrollment Limit" android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdateLimit"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Limit"
+            android:layout_marginBottom="24dp" />
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/colorBorder" android:layout_marginBottom="16dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Welcome Video" android:textColor="@color/colorPrimary" android:textStyle="bold" android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnPickVideo" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Choose Video" android:layout_marginBottom="8dp" />
+        <TextView android:id="@+id/tvSelectedVideo" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/colorMuted" android:text="No file selected" android:layout_marginBottom="8dp" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnUploadVideo" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Upload Welcome Video" android:layout_marginBottom="24dp" />
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/colorBorder" android:layout_marginBottom="16dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Change Password" android:textColor="@color/colorPrimary" android:textStyle="bold" android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etCurrentPassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Current Password" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.Francirene.TextInput" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/etNewPassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="New Password" android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnChangePassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Change Password" />
+
+    </LinearLayout>
+</ScrollView>

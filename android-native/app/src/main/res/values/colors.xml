@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Matches the web app's real CSS variables (public/css/style.css, landing.css) -->
+    <color name="colorPrimary">#1e40af</color>
+    <color name="colorPrimaryDark">#15308a</color>
+    <color name="colorSecondary">#0f766e</color>
+    <color name="colorAccent">#f59e0b</color>
+    <color name="colorSurface">#ffffff</color>
+    <color name="colorBackground">#f9fafb</color>
+    <color name="colorOnPrimary">#ffffff</color>
+    <color name="colorText">#1f2937</color>
+    <color name="colorMuted">#6b7280</color>
+    <color name="colorBorder">#e5e7eb</color>
+    <color name="colorSuccess">#10b981</color>
+    <color name="colorDanger">#ef4444</color>
+    <color name="white">#ffffff</color>
+
+    <!-- Hero section palette (public/css/landing.css .hero) -->
+    <color name="heroGradientStart">#f7fbff</color>
+    <color name="heroGradientEnd">#eef7ff</color>
+    <color name="heroHeading">#072b52</color>
+    <color name="heroMuted">#4b6b83</color>
+    <color name="ctaGradientStart">#0b76ff</color>
+    <color name="ctaGradientEnd">#0066ff</color>
+</resources>

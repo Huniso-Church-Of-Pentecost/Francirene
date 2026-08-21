@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Login - Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/badge.png" type="image">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <span>Francirene</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/parent-enrollment">Enroll</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="nav-btn theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="/student-login" class="nav-btn"><i class="fas fa-user-graduate"></i></a>
+                    <a href="/admin-login" class="nav-btn"><i class="fas fa-user-shield"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <div class="login-icon-wrapper">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2>Parent Portal</h2>
+                    <p class="login-subtitle">Monitor your child's progress and access resources</p>
+                </div>
+                <form id="parentLoginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="parentId">Parent ID</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="parentId" placeholder="e.g., PARENT-XXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-primary">Login</button>
+                </form>
+                <div id="loginMessage" class="message"></div>
+                <div class="login-divider">
+                    <span>OR</span>
+                </div>
+                <p class="login-footer">Don't have credentials? <a href="/parent-enrollment" class="link-highlight">Enroll your child</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 Francirene Educational Consult. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+        <script src="js/theme.js"></script>
+        <script src="js/parent-login.js"></script>
+</body>
+</html>

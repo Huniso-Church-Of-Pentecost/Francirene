@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/badge.png" type="image">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-book"></i>
+                    <span>Francirene</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/parent-enrollment">Enroll</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="nav-btn theme-toggle" id="themeToggle" title="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="/admin-login" class="nav-btn"><i class="fas fa-user-shield"></i></a>
+                </div>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <i class="fas fa-user-graduate"></i>
+                    <h2>Student Portal</h2>
+                </div>
+                <form id="studentLoginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="studentId">Student ID</label>
+                        <input type="text" id="studentId" placeholder="e.g., STUDENT-XXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-primary">Login</button>
+                </form>
+                <div id="loginMessage" class="message"></div>
+                <p class="login-footer">Don't have an account? <a href="/parent-enrollment">Enroll here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Francirene Educational Consult. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+        <script src="js/theme.js"></script>
+        <script src="js/student-login.js"></script>
+</body>
+</html>

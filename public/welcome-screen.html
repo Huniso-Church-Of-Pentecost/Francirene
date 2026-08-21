@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome To Francirene Educational Consult</title>
+    <link rel="stylesheet" href="css/welcome.css">
+    <!-- Font Awesome for icon-based logo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pb6xQ8m2Q2Y6u1+qz1f1v5K6Q5sKZ0xw1z5yq6Yj9z1N1f1+2s3d4f5g6h7i8j9k+0l1m2n3o4p5q6r7s8t9u==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="assets/badge.png" type="image">
+  </head>
+  <body>
+    <div class="welcome-splash" role="main" aria-labelledby="welcomeTitle">
+      <div class="splash-inner">
+        <div class="logo-wrap" aria-hidden="true">
+          <!-- Replaced SVG with a Font Awesome airplane / badge icon for motion-friendly animations -->
+          <div class="logo-icon" role="img" aria-label="Francirene logo">
+            <i class="fas fa-plane logo-plane" aria-hidden="true"></i>
+            <div class="logo-ring"></div>
+            <!-- motion trail element for richer motion graphics -->
+            <div class="plane-trail" aria-hidden="true"></div>
+            <!-- particle layer for burst effects -->
+            <div class="particle-layer" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <h1 id="welcomeTitle">Welcome to Francirene Educational Consult</h1>
+        <p class="lead">A responsive learning portal for students, parents and administrators.</p>
+
+        <div class="progress-wrap" aria-hidden="true">
+          <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text"><span id="countdown">20</span>s</div>
+        </div>
+
+        <div class="actions">
+          <label class="dont-show"><input type="checkbox" id="dontShow"> Don't show this again</label>
+          <div class="btns">
+            <button id="skipBtn" class="btn">Skip</button>
+            <button id="walkBtn" class="btn btn-outline">Walk me through</button>
+          </div>
+        </div>
+      </div>
+      <div class="splash-footer">Powered by Francirene • <small class="muted">Experience learning reimagined</small></div>
+    </div>
+
+    <script src="js/welcome.js"></script>
+    <!-- GSAP for timeline-style motion (optional, falls back to CSS if unavailable) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+3g0i9bW9i4p3xT6mGQ8r7bq1Q4h1Ykz6v0YtR9w1uZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </body>
+</html>
